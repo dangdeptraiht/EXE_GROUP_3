@@ -16,12 +16,26 @@ public class Rooms {
     private int roomStatus;
     private int roomOccupant;
     private String roomDepartment;
-    
+    private Vip vip;
+
     public Rooms(Item item, RoomItem roomitem) {
         this.item = item;
         this.roomitem = roomitem;
     }
 
+    public Rooms(int roomID, int roomFloor, int roomNumber, int roomSize, String roomImg, BigDecimal roomFee, int roomStatus, int roomOccupant, String roomDepartment, Vip vip) {
+        this.roomID = roomID;
+        this.roomFloor = roomFloor;
+        this.roomNumber = roomNumber;
+        this.roomSize = roomSize;
+        this.roomImg = roomImg;
+        this.roomFee = roomFee;
+        this.roomStatus = roomStatus;
+        this.roomOccupant = roomOccupant;
+        this.roomDepartment = roomDepartment;
+        this.vip = vip;
+    }
+    
     public Rooms(int roomID, int roomFloor, int roomNumber, int roomSize, String roomImg, BigDecimal roomFee, int roomStatus, int roomOccupant, String roomDepartment) {
         this.roomID = roomID;
         this.roomFloor = roomFloor;
@@ -42,8 +56,7 @@ public class Rooms {
         this.roomImg = roomImg;
         this.total = total;
     }
-    
-    
+
     public Rooms(int roomID, int roomFloor, int roomNumber, int roomSize, String roomImg) {
         this.roomID = roomID;
         this.roomFloor = roomFloor;
@@ -51,17 +64,17 @@ public class Rooms {
         this.roomSize = roomSize;
         this.roomImg = roomImg;
     }
-    
+
     public Rooms(int roomID, int roomFloor, int roomNumber, int roomSize, BigDecimal roomFee, String roomImg, int roomOccupant) {
         this.roomID = roomID;
         this.roomFloor = roomFloor;
         this.roomNumber = roomNumber;
-        this.roomSize = roomSize;   
+        this.roomSize = roomSize;
         this.roomFee = roomFee;
         this.roomImg = roomImg;
         this.roomOccupant = roomOccupant;
     }
-    
+
     public Rooms() {
     }
 
@@ -160,11 +173,12 @@ public class Rooms {
     public void setRoomDepartment(String roomDepartment) {
         this.roomDepartment = roomDepartment;
     }
-    
-    
-    
 
+    public Vip getVip() {
+        return vip;
+    }
+
+    public void setVip(Vip vip) {
+        this.vip = vip;
+    }
 }
-
-
-   

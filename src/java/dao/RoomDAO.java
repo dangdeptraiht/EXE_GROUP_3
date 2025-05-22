@@ -96,13 +96,15 @@ public class RoomDAO extends DBContext {
         String query = null;
         if (flag == 0) {
             query = "select * from room\n"
+                    + "JOIN vip v ON room.vipID = v.vipID\n"
                     + "where roomStatus = 1\n"
                     + "order by roomID\n"
-                    + "OFFSET ? ROWS FETCH NEXT 6 ROWS only";
+                    + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
         } else if (flag == 1) {
             query = "select * from room\n"
+                    + "JOIN vip v ON room.vipID = v.vipID\n"
                     + "order by roomID\n"
-                    + "OFFSET ? ROWS FETCH NEXT 6 ROWS only";
+                    + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
         }
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -119,7 +121,51 @@ public class RoomDAO extends DBContext {
                 int roomOccupant = rs.getInt("roomOccupant");
                 String roomDepartment = rs.getString("roomDepartment");
 
-                Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment);
+                Vip vip = new Vip();
+                vip.id = rs.getInt("vipID");
+                vip.name = rs.getString("vipName");
+                Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment, vip);
+                rooms.add(room);
+            }
+        } catch (SQLException e) {
+        }
+        return rooms;
+    }
+    public List<Rooms> pagingRoomVip(int index, int flag, int vipID) {
+        List<Rooms> rooms = new ArrayList<>();
+        String query = null;
+        if (flag == 0) {
+            query = "select * from room\n"
+                    + "JOIN vip v ON room.vipID = v.vipID\n"
+                    + "where roomStatus = 1 AND v.vipID = ?\n"
+                    + "order by roomID\n"
+                    + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
+        } else if (flag == 1) {
+            query = "select * from room\n"
+                    + "JOIN vip v ON room.vipID = v.vipID\n"
+                    + "order by roomID\n"
+                    + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
+        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, vipID);
+            ps.setInt(2, (index - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int roomID = rs.getInt("roomID");
+                int roomFloor = rs.getInt("roomFloor");
+                int roomNumber = rs.getInt("roomNumber");
+                int roomSize = rs.getInt("roomSize");
+                BigDecimal roomFee = rs.getBigDecimal("roomFee");
+                String roomImg = rs.getString("roomImg");
+                int roomStatus = rs.getInt("roomStatus");
+                int roomOccupant = rs.getInt("roomOccupant");
+                String roomDepartment = rs.getString("roomDepartment");
+
+                Vip vip = new Vip();
+                vip.id = rs.getInt("vipID");
+                vip.name = rs.getString("vipName");
+                Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment, vip);
                 rooms.add(room);
             }
         } catch (SQLException e) {

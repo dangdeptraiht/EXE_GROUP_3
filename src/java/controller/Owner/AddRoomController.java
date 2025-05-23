@@ -1,10 +1,11 @@
 package controller.Owner;
 
+import controller.ImageServlet;
 import java.io.IOException;
 import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Paths;
-
+import java.io.File;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,26 +48,25 @@ public class AddRoomController extends HttpServlet {
             int vipId = Integer.parseInt(request.getParameter("vipId"));
 
             // image
-            Part part = request.getPart("roomImg");
-            String imagePath = null;
-            if (part.getSubmittedFileName() == null
-                    || part.getSubmittedFileName().trim().isEmpty()
-                    || part == null) {
-                imagePath = null;
-            } else {
-                // duong dan luu anh
-                String path = request.getServletContext().getRealPath("/images");
-                File dir = new File(path);
-                // xem duongd an nay ton tai chua
-                if (!dir.exists()) {
-                    dir.mkdirs();
+              Part part = request.getPart("roomImg");
+            String imageUrl = null;
+
+            if (part != null && part.getSize() > 0) {
+                File uploadDir = new File(new ImageServlet().IMAGE_DIR);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
                 }
 
-                File image = new File(dir, part.getSubmittedFileName());
-                // ghi file vao trong duong dan
-                part.write(image.getAbsolutePath());
-                // lay ra cai context path cua project
-                imagePath = request.getContextPath() + "/images/" + image.getName();
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+                // Optionally rename to avoid conflicts
+                String newFileName = System.currentTimeMillis() + "_" + fileName;
+
+                File imageFile = new File(uploadDir, newFileName);
+                part.write(imageFile.getAbsolutePath());
+
+                // Tạo URL để truy cập ảnh qua servlet
+                imageUrl = request.getContextPath() + "/images/" + newFileName;
             }
 
             Room room = new Room();
@@ -79,7 +79,7 @@ public class AddRoomController extends HttpServlet {
             room.setVipId(vipId);
 
             // Lưu tên file vào Room
-            room.setRoomImg(imagePath);
+            room.setRoomImg(imageUrl);
 
             // 4. Gọi DAO để lưu vào DB
             RoomDAO roomDAO = new RoomDAO();

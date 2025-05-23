@@ -24,46 +24,46 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/forgotPassword")
 public class ForgotPassword extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-    } 
-    
+    }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String email = request.getParameter("email");
-        
+
         RequestDispatcher dispatcher = null;
-        
+
         int otpvalueLength = 6;
-        
+
         Random rand = new Random();
-        
+
         String string = "0123456789";
-        
+
         String randomOtp = "";
-        
+
         HttpSession mySession = request.getSession();
-        
-        
-        
+
+
+
         if (email != null || !email.equals("")) {
             for (int i = 0; i < otpvalueLength; i++) {
                 char c = string.charAt(rand.nextInt(string.length()));
-                randomOtp = randomOtp + c;    
+                randomOtp = randomOtp + c;
             }
             Cookie cookie = new Cookie("otpR", randomOtp);
-            
+
             cookie.setMaxAge(5*60);
-            
+
             response.addCookie(cookie);
-            
+
             String to = email;
-            
-            
+
+
             // Get the session object
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -82,20 +82,20 @@ public class ForgotPassword extends HttpServlet {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
                 message.setSubject("Request to reset password ");
                 message.setText("Please don't share OTP code with anyone, OTP code exist in 5 minute");
-                message.setText("Hi, for security, please verify your account with the OPT below. " 
+                message.setText("Hi, for security, please verify your account with the OPT below. "
                         + "Your OTP is ==========>" + randomOtp + "<========== Click the link to enter otp: " + "http://localhost:9999/SWP391.E.BL5.G5/enterotp.jsp");
                 Transport.send(message);
                 System.out.println("message sent successfully");
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
-            
+
             dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
             request.setAttribute("message", "OTP is sent to your email id");
             mySession.setAttribute("otp", randomOtp);
             mySession.setAttribute("email", email);
             dispatcher.forward(request, response);
-        } 
+        }
 
     }
 

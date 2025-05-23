@@ -60,6 +60,8 @@
                     <li><a href="penaltys?service=penaltys">Penalty</a></li>
                     <li><a href="displayslider?service=displayslider">Slider</a></li>
                     <li><a href="ExcelFee.jsp">Add fee by excel</a></li>
+                    <li><a href="addroom?service=addRoom">Add Room</a></li>
+
                 </ul>
             </li>
             <li><a href="logout">Logout</a></li>

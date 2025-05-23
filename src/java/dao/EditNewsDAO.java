@@ -4,7 +4,8 @@
  */
 package dao;
 
-import com.sun.jdi.connect.spi.Connection;
+//import com.sun.jdi.connect.spi.*;
+
 import java.sql.PreparedStatement;
 import model.News;
 import java.sql.ResultSet;

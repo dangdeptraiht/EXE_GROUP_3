@@ -1,38 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author ASUS
- */
-public class Vip{
-    public int id;
-    public String name;
+public class Vip {
+    private int vipID;
+    private String vipName; // ✅ sửa đúng: String viết hoa S
 
-    public Vip(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Vip() {}
+
+    public Vip(int vipID, String vipName) {
+        this.vipID = vipID;
+        this.vipName = vipName;
     }
 
-    public Vip() {
+    public int getVipID() {
+        return vipID;
     }
 
-    public int getId() {
-        return id;
+    public void setVipID(int vipID) {
+        this.vipID = vipID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getVipName() {
+        return vipName;
     }
 
-    public String getName() {
-        return name;
+    public void setVipName(String vipName) {
+        this.vipName = vipName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return "Vip{" + "vipID=" + vipID + ", vipName='" + vipName + '\'' + '}';
     }
 }

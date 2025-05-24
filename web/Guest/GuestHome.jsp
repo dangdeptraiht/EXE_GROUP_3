@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <!-- VIP loại 1 -->
-                                <h3 class="mb-4">Danh sách phòng VIP sloại 11</h3>
+                                <h3 class="mb-4">Danh sách phòng VIP loại 1</h3>
                                 <div class="row">
                                     <div class="col-12">
                                         <% for (int i=0; i < listRoomVip1.size(); i++) { %>
@@ -110,7 +110,7 @@
                                                         <span>
                                                             <%= listRoomVip1.get(i).getRoomFee().longValue() %>k VND
                                                         </span>
-                                                        <span>– <%= listRoomVip1.get(i).getVip().getName() %></span>
+                                                        <span>– <%= listRoomVip1.get(i).getVip().getVipName() %></span>
                                                     </div>
                                                     <div>
                                                         <span class="d-block mb-2 text-black-50">Thôn 3, Tân Xã, Thạch
@@ -161,7 +161,7 @@
                                                                     <%= listRoomVip2.get(i).getRoomFee().longValue() %>k
                                                                         VND
                                                                 </span>
-                                                                <span>– <%= listRoomVip2.get(i).getVip().getName() %>
+                                                                <span>– <%= listRoomVip2.get(i).getVip().getVipName() %>
                                                                         </span>
                                                             </div>
                                                             <div>
@@ -217,7 +217,7 @@
                                                                     <%= listRoomVip3.get(i).getRoomFee().longValue() %>k
                                                                         VND
                                                                 </span>
-                                                                <span>– <%= listRoomVip3.get(i).getVip().getName() %>
+                                                                <span>– <%= listRoomVip3.get(i).getVip().getVipName() %>
                                                                         </span>
                                                             </div>
                                                             <div>

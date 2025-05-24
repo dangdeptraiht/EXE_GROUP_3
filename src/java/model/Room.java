@@ -14,7 +14,7 @@ public class Room {
     private RoomItem roomitem;
     private BigDecimal roomFee;
     private int roomOccupant;
-
+    private int vipId;
     public Room(Item item, RoomItem roomitem) {
         this.item = item;
         this.roomitem = roomitem;
@@ -65,7 +65,21 @@ public class Room {
         this.roomSize = roomSize;   
         this.roomFee = roomFee;
     }
-    
+
+    public Room(int roomID, int roomFloor, int roomNumber, int roomSize, String roomImg, int total, Item item, RoomItem roomitem, BigDecimal roomFee, int roomOccupant, int vipId) {
+        this.roomID = roomID;
+        this.roomFloor = roomFloor;
+        this.roomNumber = roomNumber;
+        this.roomSize = roomSize;
+        this.roomImg = roomImg;
+        this.total = total;
+        this.item = item;
+        this.roomitem = roomitem;
+        this.roomFee = roomFee;
+        this.roomOccupant = roomOccupant;
+        this.vipId = vipId;
+    }
+
     public Room() {
     }
 
@@ -148,10 +162,19 @@ public class Room {
     public void setRoomOccupant(int roomOccupant) {
         this.roomOccupant = roomOccupant;
     }
-    
-    
-    
 
+    public int getVipId() {
+        return vipId;
+    }
+
+    public void setVipId(int vipId) {
+        this.vipId = vipId;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "roomID=" + roomID + ", roomFloor=" + roomFloor + ", roomNumber=" + roomNumber + ", roomSize=" + roomSize + ", roomImg=" + roomImg + ", total=" + total + ", item=" + item + ", roomitem=" + roomitem + ", roomFee=" + roomFee + ", roomOccupant=" + roomOccupant + ", vipId=" + vipId + '}';
+    }
 }
 
 

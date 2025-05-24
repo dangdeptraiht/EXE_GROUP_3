@@ -127,8 +127,8 @@ public class RoomDAO extends DBContext {
                 String roomDepartment = rs.getString("roomDepartment");
 
                 Vip vip = new Vip();
-                vip.vipID = rs.getInt("vipID");
-                vip.vipName = rs.getString("vipName");
+                vip.setVipID(rs.getInt("vipID"));
+                vip.setVipName(rs.getString("vipName"));
                 Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment, vip);
                 rooms.add(room);
             }
@@ -136,6 +136,7 @@ public class RoomDAO extends DBContext {
         }
         return rooms;
     }
+
     public List<Rooms> pagingRoomVip(int index, int flag, int vipID) {
         List<Rooms> rooms = new ArrayList<>();
         String query = null;

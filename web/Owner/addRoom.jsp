@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -80,10 +82,21 @@
                             <label for="total" class="form-label">Total</label>
                             <input type="number" class="form-control" id="total" name="total" required>
                         </div>
+                        <!--                        <div class="col-md-6">
+                                                    <label for="vipId" class="form-label">VipId</label>
+                                                    <input type="number" class="form-control" id="vipId"" name="vipId" required>
+                                                </div>-->
                         <div class="col-md-6">
-                            <label for="vipId" class="form-label">VipId</label>
-                            <input type="number" class="form-control" id="vipId"" name="vipId" required>
+                            <label for="vipId" class="form-label">Vip Type</label>
+                            <select class="form-select" id="vipId" name="vipId" required onchange="showVipPopup()">
+                                <option value="">-- Select VIP --</option>
+                                <c:forEach var="vip" items="${vipList}">
+                                    <option value="${vip.vipID}">${vip.vipName}</option>
+                                </c:forEach>
+                            </select>
+
                         </div>
+
                         <!--                        <div class="col-md-6">
                                                     <label for="item" class="form-label">Item</label>
                                                     <input type="text" class="form-control" id="item" name="item" required>
@@ -108,6 +121,39 @@
                         </a>
                     </div>
                 </form>
+
+                <!-- VIP Popup (ảnh cố định) -->
+                <div id="vipPopup" class="modal" tabindex="-1" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000;">
+                    <div class="modal-dialog" style="max-width:700px; margin:5% auto; background:white; border-radius:10px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thông tin các loại Tin VIP</h5>
+                                <button type="button" class="btn-close" onclick="closeVipPopup()"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <!-- Ảnh thông tin VIP đã có -->
+<!--                                <img src="${pageContext.request.contextPath}/uploads/aVip.png" alt="VIP Info" class="img-fluid mb-3">-->
+
+                                <!-- Ảnh mã QR mới thêm -->
+                                <img src="${pageContext.request.contextPath}/uploads/qr.png" alt="QR Payment" class="img-fluid mb-3" >
+                                <!-- Dòng nội dung chuyển khoản -->
+                                <p class="mt-2 text-dark">
+                                    <strong>Nội dung chuyển khoản:</strong>
+                                    <span class="text-primary" style="font-weight: bold; letter-spacing: 1px;">
+                                        ${paymentCode}${vip.vipName}
+                                    </span>
+                                </p>
+                                <!-- Dòng thông báo -->
+                                <p class="mt-3 fw-bold text-danger">Sau khi xác nhận chuyển tiền bài sẽ hiện lên</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="closeVipPopup()">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -137,6 +183,16 @@
                 }
 
                 return true;
+            }
+
+
+
+            function showVipPopup() {
+                document.getElementById('vipPopup').style.display = 'block';
+            }
+
+            function closeVipPopup() {
+                document.getElementById('vipPopup').style.display = 'none';
             }
         </script>
 

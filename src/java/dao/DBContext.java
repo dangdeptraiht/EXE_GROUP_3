@@ -6,6 +6,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +16,10 @@ import java.util.logging.Logger;
  * @author kienb
  */
 public class DBContext {
-    protected Connection connection;
+    
+    protected Connection connection;//kết nối giữa ứng dụng Java và cơ sở dữ liệu
+    protected PreparedStatement statement;//thực thi các câu lệnh SQL trước khi thực sự thực thi
+    protected ResultSet resultSet;// giống như 1 cái bảng , như sql manager
     public DBContext()
     {
         try{

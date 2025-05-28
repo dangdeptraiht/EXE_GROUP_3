@@ -1,5 +1,5 @@
 package controller.Owner;
-
+import java.util.UUID;
 import controller.ImageServlet;
 import java.io.IOException;
 import java.io.File;
@@ -15,17 +15,32 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import dao.RoomDAO;
+import dao.VipDAO;
+import java.util.List;
 import model.Room;
+import model.Vip;
 
 @WebServlet(name = "AddRoomController", urlPatterns = {"/addroom"})
 @MultipartConfig // Bắt buộc để upload ảnh
 public class AddRoomController extends HttpServlet {
+
+    VipDAO vipDAO = new VipDAO();
+    RoomDAO roomDAO = new RoomDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String service = request.getParameter("service");
         if (service == null || service.equals("addRoom")) {
+            // Lấy danh sách VIP từ DB
+
+            List<Vip> vipList = vipDAO.getAllVips();
+            request.setAttribute("vipList", vipList);
+            
+            // random chuỗi ck
+            String paymentCode = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8).toUpperCase();
+            request.setAttribute("paymentCode", paymentCode);
+            
             // Xử lý các logic chuẩn bị cho trang nếu cần (ví dụ: load dữ liệu từ DB)
             request.getRequestDispatcher("Owner/addRoom.jsp").forward(request, response);
         }
@@ -48,7 +63,7 @@ public class AddRoomController extends HttpServlet {
             int vipId = Integer.parseInt(request.getParameter("vipId"));
 
             // image
-              Part part = request.getPart("roomImg");
+            Part part = request.getPart("roomImg");
             String imageUrl = null;
 
             if (part != null && part.getSize() > 0) {
@@ -82,7 +97,6 @@ public class AddRoomController extends HttpServlet {
             room.setRoomImg(imageUrl);
 
             // 4. Gọi DAO để lưu vào DB
-            RoomDAO roomDAO = new RoomDAO();
             roomDAO.addRoom(room);
 
             // 5. Redirect hoặc forward sau khi thành công

@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="../css/tiny-slider.css">
         <link rel="stylesheet" href="../css/aos.css">
         <link rel="stylesheet" href="../css/style.css">
-        
+
         <!-- Include jQuery from a CDN -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
@@ -45,13 +45,16 @@
                 <ul class="dropdown">
                     <li><a href="OwnerController?service=pagingRoom&index=1">List of rooms</a></li>
                     <li><a href="OwnerController?service=listrequest">List of Request</a></li>
-                    
+
                 </ul>
             </li>               
-            <li><a class="<%= "addrenter".equals(service) ? "active" : "" %>" href="AddRenterController?service=addrenter">Add Renter</a></li>
+<!--            <li><a class="<%= "addrenter".equals(service) ? "active" : "" %>" href="AddRenterController?service=addrenter">Add Renter</a></li>-->
             <li><a href="ListRenterController">Renter Management</a></li>
-            <li class="dropdown has-children <%=("displayNews".equals(service) || "addnews".equals(service) || "ruleList".equals(service) || "addGuideline".equals(service) || "displayslider".equals(service)
+            <li><a href="addroom?service=addRoom">Add Room</a></li>
+
+            <!--            <li class="dropdown has-children <%=("displayNews".equals(service) || "addnews".equals(service) || "ruleList".equals(service) || "addGuideline".equals(service) || "displayslider".equals(service)
                     || "penaltys".equals(service))  ? "active" : "" %>">
+                
                 <a href="#">Manage</a>
                 <ul class="dropdown">
                     <li><a href="ruleList?service=ruleList">Rule</a></li>
@@ -63,7 +66,7 @@
                     <li><a href="addroom?service=addRoom">Add Room</a></li>
 
                 </ul>
-            </li>
+            </li>-->
             <li><a href="logout">Logout</a></li>
             <li>
                 <a href="OwnerController?service=ownerProfile">
@@ -80,3 +83,4 @@
         <script src="../js/custom.js"></script>
     </body>
 </html>
+

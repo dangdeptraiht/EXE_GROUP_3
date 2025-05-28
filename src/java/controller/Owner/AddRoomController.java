@@ -75,20 +75,20 @@ public class AddRoomController extends HttpServlet {
             String imageUrl = null;
 
             if (part != null && part.getSize() > 0) {
-                File uploadDir = new File(new ImageServlet().IMAGE_DIR);
+                String appPath = request.getServletContext().getRealPath("");
+                String imagePath = appPath + File.separator + "images";
+
+                File uploadDir = new File(imagePath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
 
                 String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-
-                // Optionally rename to avoid conflicts
                 String newFileName = System.currentTimeMillis() + "_" + fileName;
 
                 File imageFile = new File(uploadDir, newFileName);
                 part.write(imageFile.getAbsolutePath());
 
-                // Tạo URL để truy cập ảnh qua servlet
                 imageUrl = request.getContextPath() + "/images/" + newFileName;
             }
 

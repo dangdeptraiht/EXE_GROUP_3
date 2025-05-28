@@ -61,8 +61,15 @@ public class AddRoomController extends HttpServlet {
             int total = Integer.parseInt(request.getParameter("total"));
             BigDecimal roomFee = new BigDecimal(request.getParameter("roomFee"));
             int roomOccupant = Integer.parseInt(request.getParameter("roomOccupant"));
-            int vipId = Integer.parseInt(request.getParameter("vipId"));
+            String vipIdParam = request.getParameter("vipId");
             String paymentCode = request.getParameter("paymentCode");
+
+            // 2. Set roomStatus based on vipId
+            Integer vipId = null;
+            if (vipIdParam != null && !vipIdParam.trim().isEmpty()) {
+                vipId = Integer.parseInt(vipIdParam);
+            }
+            int roomStatus = (vipId == null) ? 1 : 0;
             // image
             Part part = request.getPart("roomImg");
             String imageUrl = null;
@@ -94,16 +101,9 @@ public class AddRoomController extends HttpServlet {
             room.setTotal(total);
             room.setVipId(vipId);
             room.setPaymentCode(paymentCode);
-
+            room.setRoomStatus(roomStatus); // Set roomStatus
             // Lưu tên file vào Room
             room.setRoomImg(imageUrl);
-
-            System.out.println("Room: " + room.getRoomFloor() + ", " + room.getRoomNumber() + ", " + room.getRoomSize());
-            System.out.println("Room fee: " + room.getRoomFee());
-            System.out.println("Occupant: " + room.getRoomOccupant());
-            System.out.println("VIP ID: " + room.getVipId());
-            System.out.println("Payment Code: " + room.getPaymentCode());
-            System.out.println("Image: " + room.getRoomImg());
 
             // 4. Gọi DAO để lưu vào DB
             roomDAO.addRoom(room);
@@ -113,8 +113,8 @@ public class AddRoomController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Có lỗi xảy ra khi thêm phòng.");
-            request.getRequestDispatcher("addRoom.jsp").forward(request, response);
+            request.setAttribute("error", "An error occurred while adding the room.");
+            request.getRequestDispatcher("Owner/addRoom.jsp").forward(request, response);
         }
     }
 

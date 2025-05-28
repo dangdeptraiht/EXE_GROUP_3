@@ -728,7 +728,7 @@ public class RoomDAO extends DBContext {
             statement.setObject(2, r.getRoomNumber());
             statement.setObject(3, r.getRoomSize());
             statement.setObject(4, r.getRoomFee());
-            statement.setObject(5, 1);
+            statement.setObject(5, r.getRoomStatus());
             statement.setObject(6, r.getRoomOccupant());
             statement.setObject(7, null);
             statement.setObject(8, r.getVipId());
@@ -737,7 +737,7 @@ public class RoomDAO extends DBContext {
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
         } catch (Exception ex) {
-            ex.printStackTrace(); // 👈 thêm dòng này
+            ex.printStackTrace(); // 👈 thêm dòng nàyƯ
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 

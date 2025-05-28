@@ -40,7 +40,6 @@
     </head>
     <body>
 
-        <jsp:include page="navbar.jsp" />
 
         <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg'); padding: 80px 0;">
             <div class="container">
@@ -88,7 +87,7 @@
                                                 </div>-->
                         <div class="col-md-6">
                             <label for="vipId" class="form-label">Vip Type</label>
-                            <select class="form-select" id="vipId" name="vipId" required onchange="showVipPopup()">
+                            <select class="form-select" id="vipId" name="vipId"  onchange="showVipPopup()">
                                 <option value="">-- Select VIP --</option>
                                 <c:forEach var="vip" items="${vipList}">
                                     <option value="${vip.vipID}">${vip.vipName}</option>
@@ -197,7 +196,6 @@
             }
         </script>
 
-        <jsp:include page="./footer.jsp" />
 
     </body>
 </html>

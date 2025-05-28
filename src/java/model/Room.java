@@ -14,8 +14,9 @@ public class Room {
     private RoomItem roomitem;
     private BigDecimal roomFee;
     private int roomOccupant;
-    private int vipId;
+    private Integer vipId;
     private String paymentCode;
+    private int roomStatus;
     public Room(Item item, RoomItem roomitem) {
         this.item = item;
         this.roomitem = roomitem;
@@ -95,6 +96,24 @@ public class Room {
         this.vipId = vipId;
         this.paymentCode = paymentCode;
     }
+
+    public Room(int roomID, int roomFloor, int roomNumber, int roomSize, String roomImg, int total, Item item, RoomItem roomitem, BigDecimal roomFee, int roomOccupant, Integer vipId, String paymentCode, int roomStatus) {
+        this.roomID = roomID;
+        this.roomFloor = roomFloor;
+        this.roomNumber = roomNumber;
+        this.roomSize = roomSize;
+        this.roomImg = roomImg;
+        this.total = total;
+        this.item = item;
+        this.roomitem = roomitem;
+        this.roomFee = roomFee;
+        this.roomOccupant = roomOccupant;
+        this.vipId = vipId;
+        this.paymentCode = paymentCode;
+        this.roomStatus = roomStatus;
+    }
+
+ 
 
     public Room() {
     }
@@ -179,11 +198,11 @@ public class Room {
         this.roomOccupant = roomOccupant;
     }
 
-    public int getVipId() {
+    public Integer getVipId() {
         return vipId;
     }
 
-    public void setVipId(int vipId) {
+    public void setVipId(Integer vipId) {
         this.vipId = vipId;
     }
 
@@ -195,10 +214,22 @@ public class Room {
         this.paymentCode = paymentCode;
     }
 
+    public int getRoomStatus() {
+        return roomStatus;
+    }
+
+    public void setRoomStatus(int roomStatus) {
+        this.roomStatus = roomStatus;
+    }
+
     @Override
     public String toString() {
-        return "Room{" + "roomID=" + roomID + ", roomFloor=" + roomFloor + ", roomNumber=" + roomNumber + ", roomSize=" + roomSize + ", roomImg=" + roomImg + ", total=" + total + ", item=" + item + ", roomitem=" + roomitem + ", roomFee=" + roomFee + ", roomOccupant=" + roomOccupant + ", vipId=" + vipId + ", paymentCode=" + paymentCode + '}';
+        return "Room{" + "roomID=" + roomID + ", roomFloor=" + roomFloor + ", roomNumber=" + roomNumber + ", roomSize=" + roomSize + ", roomImg=" + roomImg + ", total=" + total + ", item=" + item + ", roomitem=" + roomitem + ", roomFee=" + roomFee + ", roomOccupant=" + roomOccupant + ", vipId=" + vipId + ", paymentCode=" + paymentCode + ", roomStatus=" + roomStatus + '}';
     }
+
+   
+
+    
 
 }
 

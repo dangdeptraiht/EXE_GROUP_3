@@ -1,4 +1,5 @@
 package controller.Owner;
+
 import java.util.UUID;
 import controller.ImageServlet;
 import java.io.IOException;
@@ -36,11 +37,11 @@ public class AddRoomController extends HttpServlet {
 
             List<Vip> vipList = vipDAO.getAllVips();
             request.setAttribute("vipList", vipList);
-            
+
             // random chuỗi ck
             String paymentCode = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8).toUpperCase();
             request.setAttribute("paymentCode", paymentCode);
-            
+
             // Xử lý các logic chuẩn bị cho trang nếu cần (ví dụ: load dữ liệu từ DB)
             request.getRequestDispatcher("Owner/addRoom.jsp").forward(request, response);
         }
@@ -61,7 +62,7 @@ public class AddRoomController extends HttpServlet {
             BigDecimal roomFee = new BigDecimal(request.getParameter("roomFee"));
             int roomOccupant = Integer.parseInt(request.getParameter("roomOccupant"));
             int vipId = Integer.parseInt(request.getParameter("vipId"));
-
+            String paymentCode = request.getParameter("paymentCode");
             // image
             Part part = request.getPart("roomImg");
             String imageUrl = null;
@@ -92,9 +93,17 @@ public class AddRoomController extends HttpServlet {
             room.setRoomOccupant(roomOccupant);
             room.setTotal(total);
             room.setVipId(vipId);
+            room.setPaymentCode(paymentCode);
 
             // Lưu tên file vào Room
             room.setRoomImg(imageUrl);
+
+            System.out.println("Room: " + room.getRoomFloor() + ", " + room.getRoomNumber() + ", " + room.getRoomSize());
+            System.out.println("Room fee: " + room.getRoomFee());
+            System.out.println("Occupant: " + room.getRoomOccupant());
+            System.out.println("VIP ID: " + room.getVipId());
+            System.out.println("Payment Code: " + room.getPaymentCode());
+            System.out.println("Image: " + room.getRoomImg());
 
             // 4. Gọi DAO để lưu vào DB
             roomDAO.addRoom(room);

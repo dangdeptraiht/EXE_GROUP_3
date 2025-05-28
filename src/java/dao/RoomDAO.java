@@ -717,30 +717,27 @@ public class RoomDAO extends DBContext {
 
     public void addRoom(Room r) {
         connection = connection;
-        String sql = "INSERT INTO [dbo].[room]\n"
-                + "           ([roomFloor]\n"
-                + "           ,[roomNumber]\n"
-                + "           ,[roomSize]\n"
-                + "           ,[roomFee]\n"
-                + "           ,[roomStatus]\n"
-                + "           ,[roomOccupant]\n"
-                + "           ,[roomDepartment]\n"
-                + "           ,[vipID]\n"
-                + "           ,[roomImg])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,1,?,null,?,?)";
+       String sql = "INSERT INTO [dbo].[room] "
+        + "([roomFloor], [roomNumber], [roomSize], [roomFee], [roomStatus], "
+        + "[roomOccupant], [roomDepartment], [vipID], [roomImg], [paymentCode]) "
+        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
             statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setObject(1, r.getRoomFloor());
             statement.setObject(2, r.getRoomNumber());
             statement.setObject(3, r.getRoomSize());
             statement.setObject(4, r.getRoomFee());
-            statement.setObject(5, r.getRoomOccupant());
-            statement.setObject(6, r.getVipId());
-            statement.setObject(7, r.getRoomImg());
+            statement.setObject(5, 1);
+            statement.setObject(6, r.getRoomOccupant());
+            statement.setObject(7, null);
+            statement.setObject(8, r.getVipId());
+            statement.setObject(9, r.getRoomImg());
+            statement.setObject(10, r.getPaymentCode());
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
         } catch (Exception ex) {
+            ex.printStackTrace(); // 👈 thêm dòng này
             Logger.getLogger(RoomDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 

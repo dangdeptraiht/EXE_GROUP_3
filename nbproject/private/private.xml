@@ -36,9 +36,12 @@
             <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Security/newList.jsp</file>
         </group>
         <group name="PE PRJ301">
-            <file>file:/D:/Desktop/SWP391.E.BL5.G5-main/src/java/model/Room.java</file>
-            <file>file:/D:/Desktop/SWP391.E.BL5.G5-main/src/java/controller/Owner/AddRoomController.java</file>
-            <file>file:/D:/Desktop/SWP391.E.BL5.G5-main/web/Owner/addRoom.jsp</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/controller/ImageServlet.java</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/web/Owner/navbar.jsp</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/web/Owner/addRoom.jsp</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/model/Vip.java</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/controller/Owner/AddRoomController.java</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/model/Room.java</file>
         </group>
     </open-files>
 </project-private>

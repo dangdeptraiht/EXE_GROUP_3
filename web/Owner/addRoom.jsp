@@ -111,6 +111,7 @@
                             <span id="fileError" class="text-danger"></span>
                         </div>
                     </div>
+                    <input type="hidden" name="paymentCode" value="${paymentCode}">
 
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success px-4" onclick="return validateFile()">
@@ -140,7 +141,7 @@
                                 <p class="mt-2 text-dark">
                                     <strong>Nội dung chuyển khoản:</strong>
                                     <span class="text-primary" style="font-weight: bold; letter-spacing: 1px;">
-                                        ${paymentCode}${vip.vipName}
+                                        ${paymentCode}
                                     </span>
                                 </p>
                                 <!-- Dòng thông báo -->

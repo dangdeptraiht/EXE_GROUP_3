@@ -101,13 +101,11 @@ public class RoomDAO extends DBContext {
         String query = null;
         if (flag == 0) {
             query = "select * from room\n"
-                    + "JOIN vip v ON room.vipID = v.vipID\n"
                     + "where roomStatus = 1\n"
                     + "order by roomID\n"
                     + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
         } else if (flag == 1) {
             query = "select * from room\n"
-                    + "JOIN vip v ON room.vipID = v.vipID\n"
                     + "order by roomID\n"
                     + "OFFSET ? ROWS FETCH NEXT 10 ROWS only";
         }
@@ -126,10 +124,7 @@ public class RoomDAO extends DBContext {
                 int roomOccupant = rs.getInt("roomOccupant");
                 String roomDepartment = rs.getString("roomDepartment");
 
-                Vip vip = new Vip();
-                vip.setVipID(rs.getInt("vipID"));
-                vip.setVipName(rs.getString("vipName"));
-                Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment, vip);
+                Rooms room = new Rooms(roomID, roomFloor, roomNumber, roomSize, roomImg, roomFee, roomStatus, roomOccupant, roomDepartment);
                 rooms.add(room);
             }
         } catch (SQLException e) {

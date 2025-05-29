@@ -239,5 +239,9 @@ Please don't remove this copyright link unless you buy the license here https://
 
         <!-- Template Main Javascript File -->
         <script src="js/main_owner.js"></script>
+        
+        <script src="<%= request.getContextPath() %>/js/chatbot.js"></script>
+
+
     </body>
 </html>

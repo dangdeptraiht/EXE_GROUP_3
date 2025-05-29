@@ -63,7 +63,7 @@ public class AddRoomController extends HttpServlet {
             int roomOccupant = Integer.parseInt(request.getParameter("roomOccupant"));
             String vipIdParam = request.getParameter("vipId");
             String paymentCode = request.getParameter("paymentCode");
-
+//            String codePayment = paymentCode +"room"+ roomFloor +"vip"+ vipIdParam;
             // 2. Set roomStatus based on vipId
             Integer vipId = null;
             if (vipIdParam != null && !vipIdParam.trim().isEmpty()) {
@@ -100,7 +100,7 @@ public class AddRoomController extends HttpServlet {
             room.setRoomOccupant(roomOccupant);
             room.setTotal(total);
             room.setVipId(vipId);
-            room.setPaymentCode(paymentCode);
+            room.setPaymentCode(paymentCode );
             room.setRoomStatus(roomStatus); // Set roomStatus
             // Lưu tên file vào Room
             room.setRoomImg(imageUrl);

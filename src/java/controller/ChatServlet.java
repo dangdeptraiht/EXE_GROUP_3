@@ -58,7 +58,22 @@ public class ChatServlet extends HttpServlet {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            String jsonInput = "{ \"contents\": [ { \"parts\": [ { \"text\": \"" + userMessage + "\" } ] } ] }";
+            // 🎯 Prompt định hướng
+            String systemPrompt = """
+        Bạn là một trợ lý AI thân thiện cho website HoLa StayNow - nền tảng đặt và quản lý phòng trọ tại khu vực Hòa Lạc, Hà Nội.
+        Website cung cấp thông tin về các loại phòng, giá cả, tiện ích và hỗ trợ người dùng đặt phòng online.
+        Nếu người dùng hỏi về dịch vụ, vị trí, cách đặt phòng, hoặc giá – hãy trả lời ngắn gọn, dễ hiểu và lịch sự.
+        Nếu bạn không chắc chắn về câu hỏi, hãy nói: "Xin lỗi, tôi không chắc chắn về thông tin này. Bạn có thể liên hệ quản lý để biết thêm chi tiết."
+                                   - Có 3 loại phòng: Tiêu chuẩn (800k/tháng), Cao cấp (1.2 triệu/tháng), VIP (1.5 triệu/tháng).
+                                      - Mỗi phòng đều có wifi, vệ sinh riêng và chỗ để xe.
+                                      - Người dùng có thể đặt phòng trên website.
+                                      - Website không hỗ trợ thanh toán online, chỉ đặt giữ chỗ.
+                                      - Nếu người dùng hỏi về vị trí: "Địa chỉ: Thôn 3, Thạch Hòa, Thạch Thất, Hà Nội".
+        """;
+
+            String fullPrompt = systemPrompt + "\nKhách: " + userMessage;
+
+            String jsonInput = "{ \"contents\": [ { \"parts\": [ { \"text\": \"" + fullPrompt.replace("\"", "\\\"") + "\" } ] } ] }";
 
             try (OutputStream os = conn.getOutputStream()) {
                 os.write(jsonInput.getBytes(StandardCharsets.UTF_8));

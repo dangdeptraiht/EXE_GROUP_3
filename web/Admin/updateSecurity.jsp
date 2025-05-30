@@ -59,6 +59,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Security List
                             </a>
+                            <a class="nav-link" href="rooms">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Room List
+                            </a>
 
                         </div>
                     </div>

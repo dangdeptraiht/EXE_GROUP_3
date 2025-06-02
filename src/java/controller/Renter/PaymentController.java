@@ -1,6 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 package controller.Renter;
 
-import dao.PaymentDAO;
+import dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -8,12 +13,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Account;
-import model.Payment;
+import model.Room;
 
-@WebServlet(name="CreatePaymentController", urlPatterns={"/createPayment"})
-public class CreatePaymentController extends HttpServlet {
+/**
+ *
+ * @author nguye
+ */
+@WebServlet(name="PaymentController", urlPatterns={"/PaymentController"})
+public class PaymentController extends HttpServlet {
    
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -22,13 +37,12 @@ public class CreatePaymentController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreatePaymentController</title>");  
+            out.println("<title>Servlet PaymentController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreatePaymentController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet PaymentController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            //dawdawdwada
         }
     } 
 
@@ -43,12 +57,7 @@ public class CreatePaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         Account account = (Account) request.getSession().getAttribute("user");
-        if (account == null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("Renter/createPayment.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     } 
 
     /** 
@@ -61,26 +70,25 @@ public class CreatePaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-          Account account = (Account) request.getSession().getAttribute("user");
-        if (account == null) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            PaymentDAO dbPayment = new PaymentDAO();
-            String strMoney = request.getParameter("money");
-            double money = Double.parseDouble(strMoney);
-            Payment payment = new Payment();
-            payment.setMoney(money);
-            payment.setStatus(0);
-            payment.setUserId(account.getUserID());
-            dbPayment.insert(payment);
-            response.sendRedirect("paymentList");
-        }
+         String roomIdStr = request.getParameter("roomID");
+    int roomId = 0;
+    try {
+        roomId = Integer.parseInt(roomIdStr);
+    } catch (NumberFormatException e) {
+        e.printStackTrace();
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
+    RoomDAO roomDAO = new RoomDAO();
+    Room room = roomDAO.findById(roomId);
+
+    if (room != null) {
+        int roomNumber = room.getRoomNumber(); 
+        request.setAttribute("roomNumber", roomNumber);
+    }
+        request.getRequestDispatcher("/Renter/payment_qr.jsp").forward(request, response);
+    }
+
+     
     @Override
     public String getServletInfo() {
         return "Short description";

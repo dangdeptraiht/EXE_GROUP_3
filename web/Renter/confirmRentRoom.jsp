@@ -211,8 +211,19 @@
                                         <td><%= formattedFeeTotal %>k VND</td> 
                                     </tr>
                                 </table>
-                                <div class="payment-options">
+<!--                                <div class="payment-options">
                                     <form action="VNPay_PaymentController" method="post">
+                                        <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
+                                        <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
+                                        <input type="hidden" name="userID" value="<%= userID %>">
+                                        <input type="hidden" name="flag" value="1">
+                                        <button type="submit" name="paymentMethod" value="online">Pay Online</button>
+                                        <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel</a>
+                                    </form>
+                                </div>-->
+
+<div class="payment-options">
+                                    <form action="PaymentController" method="post">
                                         <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
                                         <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
                                         <input type="hidden" name="userID" value="<%= userID %>">

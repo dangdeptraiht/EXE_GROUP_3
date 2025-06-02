@@ -80,10 +80,10 @@
             .payment-options button[name="paymentMethod"][value="cash"]:hover {
                 background-color: #218838;
             }
-/*            .payment-options button[name="paymentMethod"][value="online"] {
-                background-color: #007bff;
-                color: white;
-            }*/
+            /*            .payment-options button[name="paymentMethod"][value="online"] {
+                            background-color: #007bff;
+                            color: white;
+                        }*/
             .payment-options button[name="paymentMethod"][value="online"]:hover {
                 background-color: #0056b3;
             }
@@ -211,26 +211,23 @@
                                         <td><%= formattedFeeTotal %>k VND</td> 
                                     </tr>
                                 </table>
-<!--                                <div class="payment-options">
-                                    <form action="VNPay_PaymentController" method="post">
-                                        <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
-                                        <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
-                                        <input type="hidden" name="userID" value="<%= userID %>">
-                                        <input type="hidden" name="flag" value="1">
-                                        <button type="submit" name="paymentMethod" value="online">Pay Online</button>
-                                        <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel</a>
-                                    </form>
-                                </div>-->
+                                    
+                                <div class="payment-options"> 
+                                    <button type="button" onclick="showQRCode()">Pay Online</button> 
+                                    <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel</a> 
+                                </div>
 
-<div class="payment-options">
-                                    <form action="PaymentController" method="post">
-                                        <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
-                                        <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
-                                        <input type="hidden" name="userID" value="<%= userID %>">
-                                        <input type="hidden" name="flag" value="1">
-                                        <button type="submit" name="paymentMethod" value="online">Pay Online</button>
-                                        <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel</a>
-                                    </form>
+                                <div id="qr-overlay" style="display: none; position: fixed; top: 0; left: 0;
+                                     width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);
+                                     align-items: center; justify-content: center; z-index: 9999;">
+
+                                    <div style="position: relative; background-color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                                        <button onclick="hideQRCode()" style="position: absolute; top: 5px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+
+                                        <img src="<%= request.getContextPath() %>/Image/QR_Code/QR_Code.png" 
+                                             alt="QR Code" style="max-width: 300px;">
+                                        <p style="margin-top: 10px;">Content payment:MaPhong-HoVaTen-SDT</p>
+                                    </div>
                                 </div>
                             </div>
                             <!-- end payment -->
@@ -307,5 +304,14 @@
         <script src="js/navbar.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
+        <script>
+    function showQRCode() {
+        document.getElementById("qr-overlay").style.display = "flex";
+    }
+
+    function hideQRCode() {
+        document.getElementById("qr-overlay").style.display = "none";
+    }
+        </script>
     </body>
 </html>

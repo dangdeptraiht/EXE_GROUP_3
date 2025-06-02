@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 import model.RoomDetailSe;
 import model.Rooms;
 import model.UserDetail;
@@ -108,6 +109,12 @@ public class RenterRoomController extends HttpServlet {
             int userID = basicUserDetail.getUserID();
             request.setAttribute("userID", userID);
             request.setAttribute("roomDetail", roomDetail);
+            
+            // random chuỗi ck
+            String paymentCode = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8).toUpperCase();
+            request.setAttribute("paymentCode", paymentCode);
+            
+            
             request.getRequestDispatcher("Renter/confirmRentRoom.jsp").forward(request, response);
         } else if (flag == 1) {
             boolean unlockRoom = daoRenter.unlockRoom(roomID);

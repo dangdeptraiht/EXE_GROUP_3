@@ -226,7 +226,7 @@
 
                                         <img src="<%= request.getContextPath() %>/Image/QR_Code/QR_Code.png" 
                                              alt="QR Code" style="max-width: 300px;">
-                                        <p style="margin-top: 10px;">Content payment:MaPhong-HoVaTen-SDT</p>
+                                        <p style="margin-top: 10px;">Content payment: <%= roomDetail.getRoomNumber() + "_" + request.getAttribute("paymentCode") %> </p>
                                     </div>
                                 </div>
                             </div>

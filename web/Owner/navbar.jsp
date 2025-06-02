@@ -70,7 +70,7 @@
             <li><a href="logout">Logout</a></li>
             <li>
                 <a href="OwnerController?service=ownerProfile">
-                    <img src="images/firefly.jpg" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
+                    <img src="data:image/jpg;base64,${imgAvata}" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
                 </a>
             </li>
         </ul>

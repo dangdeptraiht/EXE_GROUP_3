@@ -247,5 +247,6 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/navbar.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
+         <script src="<%= request.getContextPath() %>/js/chatbot.js"></script>
     </body>
 </html>

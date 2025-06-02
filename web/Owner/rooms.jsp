@@ -685,6 +685,6 @@
             document.getElementById("departmentA").addEventListener("change", filterRoomsByDepartment);
             document.getElementById("departmentB").addEventListener("change", filterRoomsByDepartment);
         </script>
-
+ <script src="<%= request.getContextPath() %>/js/chatbot.js"></script>
     </body>
 </html>

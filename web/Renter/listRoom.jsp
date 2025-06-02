@@ -619,22 +619,22 @@
         <script src="js/main_owner.js"></script>
 
         <script>
-                                            document.addEventListener('DOMContentLoaded', function () {
-                                                var searchInput = document.getElementById('searchInput');
-                                                var roomList = document.getElementById('roomList').children;
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var searchInput = document.getElementById('searchInput');
+                                            var roomList = document.getElementById('roomList').children;
 
-                                                searchInput.addEventListener('input', function () {
-                                                    var filter = searchInput.value.toLowerCase();
-                                                    Array.from(roomList).forEach(function (room) {
-                                                        var roomName = room.getAttribute('data-room-name').toLowerCase();
-                                                        if (roomName.indexOf(filter) > -1) {
-                                                            room.style.display = '';
-                                                        } else {
-                                                            room.style.display = 'none';
-                                                        }
-                                                    });
+                                            searchInput.addEventListener('input', function () {
+                                                var filter = searchInput.value.toLowerCase();
+                                                Array.from(roomList).forEach(function (room) {
+                                                    var roomName = room.getAttribute('data-room-name').toLowerCase();
+                                                    if (roomName.indexOf(filter) > -1) {
+                                                        room.style.display = '';
+                                                    } else {
+                                                        room.style.display = 'none';
+                                                    }
                                                 });
                                             });
+                                        });
         </script>
 
         <script>
@@ -714,7 +714,7 @@
             document.getElementById("departmentA").addEventListener("change", filterRoomsByDepartment);
             document.getElementById("departmentB").addEventListener("change", filterRoomsByDepartment);
         </script>
-
+        <script src="<%= request.getContextPath() %>/js/chatbot.js"></script>
 
 
     </body>

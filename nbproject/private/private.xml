@@ -36,7 +36,8 @@
             <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Security/newList.jsp</file>
         </group>
         <group name="PE PRJ301">
-            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/controller/ChatServlet.java</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/web/chat-widget/sendEmail.jsp</file>
+            <file>file:/D:/Desktop/EXE/EXE_GROUP_3/src/java/controller/SendEmailServlet.java</file>
         </group>
     </open-files>
 </project-private>

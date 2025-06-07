@@ -4,4 +4,20 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <display-name>MyWebApp</display-name>
+    <!-- Declare the GuestController servlet -->
+    <servlet>
+        <servlet-name>GuestController</servlet-name>
+        <servlet-class>controller.Guest.GuestController</servlet-class>
+    </servlet>
+
+    <!-- Map the servlet to a URL -->
+    <servlet-mapping>
+        <servlet-name>GuestController</servlet-name>
+        <url-pattern>/GuestController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Make GuestController the welcome/default page -->
+    <welcome-file-list>
+        <welcome-file>GuestController</welcome-file>
+    </welcome-file-list>
 </web-app>
